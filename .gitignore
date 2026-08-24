@@ -49,6 +49,8 @@ logs/
 # 예외: config 템플릿과 워크플로 다이어그램 등 텍스트는 유지
 !pipelines/config/TEMPLATE.conf
 !stage1/config/TEMPLATE.conf
+# 예외: L01 케이스 스터디 구조 시각화 (포트폴리오용, 의도적 포함)
+!L01/docs/figures/*.png
 
 # ---- OS / editor ----
 .DS_Store

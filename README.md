@@ -6,6 +6,9 @@
 ![Runtime](https://img.shields.io/badge/Runtime-Linux%20GPU%20%2F%20SLURM-black)
 ![Domain](https://img.shields.io/badge/Domain-Structural%20Biology-1baf7a)
 
+> **▶ 대표 사례 — [L01: Multi-copy 리간드 케이스 스터디](L01/README.md)**
+> 같은 리간드가 한 구조에 1~4 copy로 결합 + 촉매 Zn을 포함하는 CASP 업데이트에 맞춰 파이프라인을 확장하고, **실험 구조로 검증**(예측 pose 78/80이 실험 약물자리와 <3Å 적중)한 완결 사례입니다. 문제 진단 → copy별 pocket 해결 → 실험/물리 검증까지 한 흐름으로 정리했습니다.
+
 ---
 
 ## 한눈에 — 이 파이프라인이 푸는 문제
@@ -50,7 +53,7 @@ CASP 대회는 `단백질 서열 + 리간드(SMILES) + Task(P=포즈 예측 / A=
     └─ scripts/  실제 타겟 L01("1 단백질 : 다수 리간드")에 적용한 스크립트 (단계별)
 ```
 
-`pipeline/` 이 재사용 가능한 본체이고, `L01/scripts/` 는 그 본체를 실제 대회 타겟에 맞게 확장·운용한 예시입니다.
+`pipeline/` 이 재사용 가능한 본체이고, `L01/` 은 그 본체를 실제 대회 타겟에 맞게 확장·운용한 완결 사례입니다 — 서사·검증 결과는 **[`L01/README.md`](L01/README.md)** 참조.
 
 처음 본다면 **[`pipeline/pipelines/OVERVIEW.md`](pipeline/pipelines/OVERVIEW.md)** 부터 읽으면 전체 지도를 볼 수 있습니다.
 

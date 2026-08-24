@@ -39,6 +39,14 @@ CASP17 타겟 **L01 (BFT1, 아연 metalloprotease)** 에 [`../pipeline/`](../pip
 3. **화학적 정합** — 리간드 RDKit 분석: 80/80 fragment(MW<300), zinc-binding group 5/80 → exosite 결합이 화학적으로 타당함을 입증
 4. **artifact 포착** — Zn 추가가 소수 fragment를 활성부위로 끌어당기는 현상을 검증으로 진단
 
+### 시각화
+
+| ![exosite overlap](docs/figures/fig1_exosite_overlap.png) | ![exosite vs zinc](docs/figures/fig2_exosite_vs_zinc.png) |
+|:--:|:--:|
+| **예측 pose ↔ 실험 약물 겹침** — 대표 예측 리간드(청록·노랑·주황·자홍)가 실험 약물결합 구조(초록: 6JP/7X9/7WK)와 exosite에서 정렬. | **exosite vs 촉매 Zn** — 예측 리간드는 exosite(우측)에 모이고, 촉매 Zn(보라 구, 참조 구조)은 ~25Å 떨어져 있음. |
+
+*예측 pose를 실험 구조(7POU)에 서열정렬(gemmi CA superposition, RMSD <1.3Å)로 올려 렌더 (open-source 3Dmol.js).*
+
 ## 물리 정제 — PoseBusters 100% clean
 
 제출 pose의 물리 유효성(결합길이·각도·고리평탄·clash)을 PoseBusters로 검사 후 정제:
