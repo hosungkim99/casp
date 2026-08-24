@@ -49,11 +49,13 @@ CASP 대회는 `단백질 서열 + 리간드(SMILES) + Task(P=포즈 예측 / A=
 │   ├─ stage2/       확정 fragment의 복합체 포즈(≤5) 예측 → 제출(tgz)
 │   └─ oracle/       결합확률 정의를 AUC로 검증하는 스크립트
 ├─ oracle/       oracle 검증 세트 (양성 3 + 디코이 12 분자표) — 위 스크립트의 정답 데이터
-└─ L01/
-    └─ scripts/  실제 타겟 L01("1 단백질 : 다수 리간드")에 적용한 스크립트 (단계별)
+├─ L01/          실제 타겟 L01("1 단백질 : 다수 리간드", multi-copy+Zn) 완결 사례
+│   ├─ README.md  케이스 스터디 (서사·검증)
+│   ├─ docs/·results/·scripts/
+└─ examples/     단일 리간드(1:1) end-to-end 예제 3개 (T2411·T2412·T2413)
 ```
 
-`pipeline/` 이 재사용 가능한 본체이고, `L01/` 은 그 본체를 실제 대회 타겟에 맞게 확장·운용한 완결 사례입니다 — 서사·검증 결과는 **[`L01/README.md`](L01/README.md)** 참조.
+`pipeline/` 이 재사용 가능한 본체이고, `L01/`·`examples/` 는 그 본체를 실제 대회 타겟에 적용한 사례입니다 — 복잡한 multi-copy 사례는 **[`L01/README.md`](L01/README.md)**, 표준 단일 리간드 흐름은 **[`examples/README.md`](examples/README.md)** 참조.
 
 처음 본다면 **[`pipeline/pipelines/OVERVIEW.md`](pipeline/pipelines/OVERVIEW.md)** 부터 읽으면 전체 지도를 볼 수 있습니다.
 

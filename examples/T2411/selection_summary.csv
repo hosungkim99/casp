@@ -1,0 +1,4 @@
+model,pocket_id,ligand_cluster_id,size,iptm,lscore,gnina_affinity,cnn_score,composite,pocket_pass,posebusters_valid,source_cif
+model_1,1,1,631,0.94,0.94,-5.50445,0.74431,0.9875,True,True,/path/to/T2411/results/A1+U08/af3_msa/af3/seed_30/sample_0/model.cif
+model_2,1,3,3,0.779,0.779,-5.92895,0.81332,0.2,True,True,/path/to/T2411/results/A1+U08/af3_msa/of3/seed_24/sample_3/model.cif
+model_3,1,2,6,0.871,0.871,0.86185,0.81588,0.1738,True,True,/path/to/T2411/results/A1+U08/af3_msa/of3/seed_30/sample_0/model.cif

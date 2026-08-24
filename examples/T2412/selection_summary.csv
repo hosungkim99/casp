@@ -1,0 +1,6 @@
+model,pocket_id,ligand_cluster_id,size,rmsd_mean,rmsd_std,iptm,ligand_iptm,confidence,lscore,gnina_affinity,cnn_score,cnn_affinity,composite,pocket_pass,posebusters_valid,source_cif
+model_1,1,1,132,1.247,0.296,0.96,0.96,,0.96,-6.01321,0.88605,5.98232,0.9843,True,True,/path/to/T2412/results/A1+LIG/af3_msa/pt2/seed_15/sample_2/model.cif
+model_2,1,2,63,1.0,0.285,0.921,0.921,,0.921,-5.78235,0.91092,6.68693,0.7497,True,True,/path/to/T2412/results/A1+LIG/af3_msa/pt2/seed_10/sample_2/model.cif
+model_3,1,3,59,1.055,0.276,0.947,0.784,,0.947,-6.57811,0.91334,7.21898,0.6563,True,True,/path/to/T2412/results/A1+LIG/af3_msa/bt2/seed_8/sample_2/model.cif
+model_4,1,44,2,0.271,0.0,0.921,0.921,,0.921,-4.91356,0.89826,7.67928,0.5489,True,True,/path/to/T2412/results/A1+LIG/af3_msa/of3/seed_27/sample_1/model.cif
+model_5,1,18,7,1.173,0.337,0.87,0.87,,0.87,-5.91249,0.92197,6.69958,0.5485,True,True,/path/to/T2412/results/A1+LIG/af3_msa/pt2/seed_6/sample_0/model.cif

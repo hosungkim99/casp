@@ -51,6 +51,9 @@ logs/
 !stage1/config/TEMPLATE.conf
 # 예외: L01 케이스 스터디 구조 시각화 (포트폴리오용, 의도적 포함)
 !L01/docs/figures/*.png
+# 예외: examples 단일리간드 예제의 최종 pose·그림 (의도적 포함)
+!examples/**/*.png
+!examples/**/model_1.cif
 
 # ---- OS / editor ----
 .DS_Store
