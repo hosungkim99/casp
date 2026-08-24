@@ -1,0 +1,25 @@
+#!/bin/bash
+# env_setup.sh.example — 이 파이프라인 실행 환경 설정 예시
+#
+# 스크립트·config·문서에 있는 /path/to/... 와 USERNAME 은 모두 자리표시자입니다.
+# 자신의 클러스터 경로/계정에 맞게 아래 값을 채운 뒤 이 파일을 `source` 하세요.
+#   cp env_setup.sh.example env_setup.sh   # 편집 후
+#   source env_setup.sh
+
+# 프로젝트 루트 (작업 공간)
+export CASP_ROOT=/path/to/casp17-ligand
+
+# 외부 도구 — 설치 위치에 맞게. PATH에 이미 있으면 비워도 됨.
+export GNINA_SIF="$CASP_ROOT/models/gnina/gnina.sif"        # gnina (singularity 이미지)
+export PRANK="$CASP_ROOT/models/p2rank/p2rank_2.5.1/prank"  # p2rank 실행 파일
+
+# 구조/도킹용 python 환경 (gemmi + rdkit + numpy + matplotlib)
+export PY_SCI="$CASP_ROOT/.micromamba/envs/boltz2/bin/python"
+# PoseBusters 환경 (선택)
+# export PY_PB="$CASP_ROOT/.micromamba/envs/casp_eval/bin/python"
+
+# CASP 제출 author/group 코드
+export CASP_AUTHOR=CHANGE-ME
+
+# 참고: gnina·p2rank·PoseBusters·co-folding 모델(AF3/Boltz-2 등)은
+#       pip 패키지가 아닌 외부 바이너리/별도 환경입니다. 위 경로만 맞춰주면 됩니다.

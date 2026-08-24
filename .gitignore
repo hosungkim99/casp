@@ -1,0 +1,57 @@
+# ---- Python ----
+__pycache__/
+*.py[cod]
+*.pyo
+*.egg-info/
+.ipynb_checkpoints/
+.venv/
+env/
+
+# ---- CASP / structural-biology data & outputs (코드 저장소에 넣지 않음) ----
+# 대용량 예측 구조·중간 산출물·제출 파일은 커밋하지 않습니다.
+*.cif
+*.pdb
+*.sdf
+*.mol
+*.mol2
+*.npy
+*.npz
+*.pkl
+*.pt
+*.pth
+*.ckpt
+
+# 번호별 출력 폴더 (run_pipeline 산출물)
+00_collect/
+01_protein_clusters/
+02_pocket_candidates/
+03_pocket_validation/
+04_ligand_clusters/
+04b_posebusters/
+05_final/
+05b_refined/
+05c_confidence/
+06_validation/
+07_viz/
+08_casp_lg/
+outputs/
+runs/
+logs/
+
+# 그림·보고서 바이너리
+*.png
+*.jpg
+*.jpeg
+*.docx
+*.tgz
+*.tar.gz
+
+# 예외: config 템플릿과 워크플로 다이어그램 등 텍스트는 유지
+!pipelines/config/TEMPLATE.conf
+!stage1/config/TEMPLATE.conf
+
+# ---- OS / editor ----
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
