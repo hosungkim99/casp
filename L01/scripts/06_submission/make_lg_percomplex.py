@@ -192,4 +192,4 @@ if fail:
 
 # ── 실행 ── (rdkit+gemmi 있는 env; 예: ligand_select 또는 boltz2)
 #   CASP_GROUP=YYY CASP_AUTHOR=CHANGE-ME python make_lg_percomplex.py
-#   그다음:  cd $L01_OUT/..; tar -czf L01LG_YYY.tgz ./L01
+#   그다음:  cd $L01_OUT/..; tar -czf L01LG${CASP_GROUP}.tgz ./L01

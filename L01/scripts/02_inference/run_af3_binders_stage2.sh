@@ -23,7 +23,7 @@ CONTAINER=$BASE/binders
 AF3PY=/path/to/casp17-ligand/.micromamba/envs/af3_red/bin/python
 AF3=/path/to/casp17-ligand/models/af3_red/run_alphafold.py
 DB=/path/to/casp/af3_db/af3
-export LD_LIBRARY_PATH=${CUDA_LIB}:${LD_LIBRARY_PATH:-}
+export LD_LIBRARY_PATH=${CUDA_LIB:+$CUDA_LIB:}${LD_LIBRARY_PATH:-}   # CUDA_LIB=클러스터 CUDA lib 경로 (env_setup.sh에서 설정)
 
 mkdir -p /path/to/casp17-ligand/users/USERNAME/logs
 mapfile -t CIDS < <(ls -1 "$CONTAINER" | grep -E '^L01[0-9]')
