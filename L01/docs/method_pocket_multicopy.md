@@ -30,7 +30,7 @@ p2rank(druggable cavity 예측)와 대조했을 때, multi-copy pocket들의 cav
 ④ 위치 기반 그리디 클러스터링 (8Å)   →  점이 뭉친 곳 = 진짜 pocket
 ```
 
-핵심 코드 (`pipeline_core/2_pocket_candidates.py`):
+핵심 코드 ([`pipeline/pipelines/core/2_pocket_candidates.py`](../../pipeline/pipelines/core/2_pocket_candidates.py); `copy_centroids`는 [`pipeline/common/complex_io.py`](../../pipeline/common/complex_io.py)):
 
 ```python
 cens = cio.cached_copy_centroids(r["cif"], cache)   # 4-copy면 centroid 4개
