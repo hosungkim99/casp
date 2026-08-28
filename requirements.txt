@@ -6,10 +6,6 @@ gemmi          # 구조(cif/pdb) 파싱
 rdkit          # SMILES 처리, 대칭보정 RMSD
 matplotlib     # 리간드 PCA·접촉 지문 시각화
 
-# ML 실험 라인 (pipelines/ml) — 오프라인
-xgboost
-scikit-learn   # AUC 등 지표
-
 # ─────────────────────────────────────────────────────────────
 # 아래는 pip 패키지가 아닌 외부 도구/별도 환경 (별도 설치 필요):
 #   - gnina        : 도킹 스코어링 (CNN score/affinity + Vina)  — singularity/바이너리

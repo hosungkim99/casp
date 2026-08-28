@@ -36,10 +36,3 @@
 | `10_pose_vs_template.py` | `templates=`/`templates_dir=` | 후보별 템플릿 대조(overlap/jaccard) |
 | `8_visualize.py` | 자동 | 4패널 + 접촉지문 PNG |
 | `11_make_summary.py` | 자동 | outputs → 정리문서 초안 SUMMARY_DRAFT.md |
-
-## ml/ — ML 실험 (수동·오프라인, 파이프라인과 분리)
-| 스크립트 | 역할 |
-|---|---|
-| `extract_features.py` | 출력 CSV → 포즈 단위 features.csv (`--truth`로 label) |
-| `select_score_features.py` | 핵심 피처만 추림 → features_core.csv |
-| `train_xgb.py` | XGBoost 학습/평가(AUC·중요도), 타겟 단위 분리 |

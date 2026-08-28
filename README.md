@@ -76,14 +76,13 @@ CASP 대회는 `단백질 서열 + 리간드(SMILES) + Task(P=포즈 예측 / A=
 - **구조/기하**: gemmi(구조 파싱), NumPy, RDKit(SMILES·대칭보정 RMSD), Kabsch 정렬
 - **도킹/스코어링**: gnina(CNN score/affinity + Vina), p2rank(포켓 예측), PoseBusters(물리 유효성)
 - **구조 예측(입력 생성)**: AlphaFold3, Boltz-2, OpenFold3, Protenix
-- **ML 실험**: XGBoost, scikit-learn
 - **시각화**: matplotlib (리간드 PCA·접촉 지문)
 
 ---
 
 ## 실행 방법
 
-경로 4개와 task만 채운 config 하나로 전 단계가 순서대로 자동 실행됩니다.
+아래는 **1 단백질 : 1 리간드** 표준 흐름입니다. 경로 4개와 task만 채운 config 하나로 전 단계가 순서대로 자동 실행됩니다. (**L01**처럼 리간드가 한 구조에 여러 copy 결합하는 **1:다수(multi-copy)** 문제는, 이 본체를 감싸는 별도 스크립트 묶음 [`L01/scripts/`](L01/scripts/) `01`~`07`로 진행했습니다 — 입력·수집·선정·제출을 multi-copy에 맞게 확장.)
 
 ```bash
 # 1) config 작성 (필수 키: target, results_dir, out_dir, ligand_tsv, task)

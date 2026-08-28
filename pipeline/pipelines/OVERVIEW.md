@@ -16,8 +16,7 @@ pipeline/
    ├─ run_pipeline.py      지휘자 (config 읽어 순서대로 자동 실행)
    ├─ core/     0~6,9      메인 흐름 (항상 자동)
    ├─ boost/    4b,4c,5b,5c 보강 (config 플래그로 삽입)
-   ├─ analysis/ 7,8,10,11  검증·시각화·보고
-   └─ ml/       extract/select/train  ML 실험 (수동)
+   └─ analysis/ 7,8,10,11  검증·시각화·보고
 ```
 > 아래 본문은 스크립트를 번호로만 부르지만, 실제 경로는 위 하위폴더 기준(`core/2_pocket_candidates.py` 등).
 
@@ -52,12 +51,10 @@ pipeline/
 | **② 보강** | `4b`,`4c`,`5b`,`5c` | ⚙️ config 플래그 켤 때만 자동 삽입 | 물리 검증·정제·신뢰도 (품질 보강) |
 | **③ 검증/비교** | `7`, `10` | 🧪 실험구조/템플릿 있을 때만 | 우리 예측이 실험과 맞는지 대조 |
 | **④ 시각화·보고** | `8`, `11` | ✅ 자동 | 그림(`8`) + 정리문서 초안(`11`; 사실만 자동, 판단은 사람이 ✍️) |
-| **⑤ ML 실험** | `extract_features`, `select_score_features`, `train_xgb` | ❌ 수동·오프라인 | 여러 타겟 모아 학습용 데이터/모델 (연구용) |
 | **공용 라이브러리** | `complex_io.py`, `geom.py`, `scoring.py` | (import 전용) | 모든 스텝이 공유하는 파서·기하·gnina 함수 |
 | **legacy/** | `cluster_poses` 등 | 🚫 미사용 | 단일레벨 구버전 (참고용 보관) |
 
 **지휘자**: `run_pipeline.py` 가 config 파일 하나를 읽어 ①②③④를 **순서대로 자동 호출**한다.
-(⑤ ML 라인은 파이프라인과 분리된 별도 도구다.)
 
 > 실행 환경 표기: **sci** = boltz2 env(`numpy`+`gemmi`+`rdkit`+`matplotlib`) / **stdlib** = 순수 python /
 > **pb** = posebusters env. gnina·p2rank는 singularity/외부 바이너리로 호출.
@@ -177,21 +174,7 @@ pipeline/
 
 ---
 
-## 6. ⑤ ML 실험 라인 (파이프라인과 분리된 오프라인 연구용)
-
-여러 타겟의 파이프라인 출력을 모아 **"어떤 포즈가 정답이 될지"를 학습**하려는 실험. 수동 실행.
-
-| 스크립트 | 역할 |
-|----------|------|
-| `extract_features.py` | 한 타겟의 출력 CSV들을 **포즈 단위로 join** → `features.csv`. `--truth` 주면 RMSD-to-정답 + label(≤2Å=1)까지. `--append`로 여러 타겟 누적 |
-| `select_score_features.py` | `features.csv`에서 **핵심 피처만** 추려 `features_core.csv` |
-| `train_xgb.py` | features.csv로 **XGBoost** 학습, AUC + 피처 중요도 출력. 타겟 단위 train/test 분리(누수 방지) |
-
-> ⚠️ 한계(파일 주석에 명시): 포켓레벨 gnina는 포켓 대표값이 포켓 내 모든 포즈에 브로드캐스트됨(포즈 간 변별 X).
-
----
-
-## 7. 공용 라이브러리 (import 전용, 단독 실행 X)
+## 6. 공용 라이브러리 (import 전용, 단독 실행 X)
 
 상위 `pipeline/common/`에 있음. 각 스텝 상단 부트스트랩이 자동으로 찾으므로 하위폴더 어디에 있어도 됨.
 (상세: [../common/OVERVIEW.md](../common/OVERVIEW.md))
@@ -216,7 +199,7 @@ pipeline/
 
 ---
 
-## 8. 스크립트별 역할 — 한 줄 사전 (전체 목록)
+## 7. 스크립트별 역할 — 한 줄 사전 (전체 목록)
 
 | 파일 | 라인 | 한 줄 |
 |------|------|-------|
@@ -242,14 +225,11 @@ pipeline/
 | `10_pose_vs_template.py` | 검증 | 후보별 템플릿 대조 (overlap/jaccard; config `templates=`로 자동) |
 | `8_visualize.py` | 시각화 | 4패널 + 접촉지문 PNG. templates 주면 **final pose별×템플릿별 접촉지문 격자**(`contact_fp_*.png`; 클러스터 빈도 x축, 템플릿 리간드 공유잔기 빨강)도 생성 |
 | `11_make_summary.py` | 보고 | outputs CSV → 정리문서 초안 `SUMMARY_DRAFT.md`(사실 자동/판단은 ✍️ 자리) |
-| `extract_features.py` | ML | 출력 CSV → 포즈 단위 features.csv |
-| `select_score_features.py` | ML | 핵심 피처만 추림 |
-| `train_xgb.py` | ML | XGBoost 학습/평가 |
 | `legacy/*` | 미사용 | 단일레벨 구버전 보관 |
 
 ---
 
-## 9. 실행법 / 되돌아가기 (요약)
+## 8. 실행법 / 되돌아가기 (요약)
 
 ```bash
 # 1) config 작성 (경로 4개 + task 만 채우면 됨)
