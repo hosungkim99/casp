@@ -86,6 +86,43 @@ L01/
     └── 07_validation/   pose 검증·정제 (exosite/Zn/PoseBusters/gnina/MMFF)
 ```
 
+## 실행 방법
+
+L01은 범용 파이프라인처럼 config 하나로 자동 실행되지 않고, multi-copy·Zn에 맞춘 **단계별 스크립트(`scripts/01`~`07`)를 순서대로** 돌립니다. 포켓 발견(04)은 내부에서 범용 본체([`../pipeline/pipelines/run_pipeline.py`](../pipeline/pipelines/run_pipeline.py))를 호출합니다.
+
+```bash
+# 1) 입력 생성 — 모델별 포맷으로 리간드 count=N + Zn 삽입 (pt2/af3/bt2)
+python scripts/01_inputs/stage2_pt2_inputs.py \
+    --csv $SC/inputs/L01.smiles.stage2.csv \
+    --existing-root $SC/targets/L01/consensus \
+    --out-root $SC/targets/L01/stage2_pt2_out         # --no-zn 로 Zn 제외 가능
+
+# 2) 추론 — SLURM 배열로 binder 청크 분할 (모델별)
+sbatch --array=0-5%3 scripts/02_inference/run_af3_binders_stage2.sh
+sbatch --array=0-5%3 scripts/02_inference/run_bt2_binders_stage2.sh
+sbatch --array=0-5%3 scripts/02_inference/run_protenix_binders_stage2.sh
+#   (bt2는 이후 normalize_bt2_unified.py 로 통합 leaf 포맷 정규화)
+
+# 3+4) 3모델 합본 → 포켓 발견·검증
+#   04가 03 collect + 본체 pocket 스텝(copy별 centroid) + p2rank 검증을 묶어 실행
+bash scripts/04_pipeline/stage2_run_pockets.sh
+
+# 5) 구조 단위 선정 — copy별 pocket coverage·clash·confidence 종합, binder당 MODEL1
+python scripts/05_select/stage2_select_multicopy.py \
+    --cons $SC/targets/L01/consensus_s2 --top 5        # --only L010462 로 특정 binder만
+
+# 6) CASP LG 제출 파일 — N개 LIGAND(HTX명) + Zn 레코드
+CASP_GROUP=YYY CASP_AUTHOR=CHANGE-ME \
+    python scripts/06_submission/make_lg_percomplex.py
+
+# 7) 검증·정제 — exosite 거리 / Zn 배위 / PoseBusters → gnina·MMFF·교체
+python scripts/07_validation/exosite_overlap.py        # 실험 약물자리와의 거리
+python scripts/07_validation/pose_zn_distance.py       # 리간드↔Zn 거리
+python scripts/07_validation/refine_mmff_stage2.py     # 물리 정제(MMFF)
+```
+
+> 예시의 `$SC`는 작업 루트 자리표시자입니다(= [`../env_setup.sh.example`](../env_setup.sh.example)의 `$CASP_ROOT`). 경로·계정을 본인 환경에 맞게 채운 뒤 `source` 하세요. 04는 범용 본체를 감싸는 래퍼라, L01의 **copy별 pocket 로직**([`docs/method_pocket_multicopy.md`](docs/method_pocket_multicopy.md))이 여기서 작동합니다.
+
 ## 기술 스택
 
 - **구조 예측**: AlphaFold3, Boltz-2, Protenix (co-folding)
