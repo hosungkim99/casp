@@ -90,6 +90,8 @@ L01/
 
 L01은 범용 파이프라인처럼 config 하나로 자동 실행되지 않고, multi-copy·Zn에 맞춘 **단계별 스크립트(`scripts/01`~`07`)를 순서대로** 돌립니다. 포켓 발견(04)은 내부에서 범용 본체([`../pipeline/pipelines/run_pipeline.py`](../pipeline/pipelines/run_pipeline.py))를 호출합니다.
 
+> 📄 스크립트별 상세(하는 일·주요 값·일반 파이프라인과의 차이)는 **[`docs/L01_PIPELINE.md`](docs/L01_PIPELINE.md)** 참조.
+
 ```bash
 # 1) 입력 생성 — 모델별 포맷으로 리간드 count=N + Zn 삽입 (pt2/af3/bt2)
 python scripts/01_inputs/stage2_pt2_inputs.py \
